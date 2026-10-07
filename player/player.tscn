@@ -1,0 +1,189 @@
+[gd_scene format=3 uid="uid://bsqfy1jpl5p63"]
+
+[ext_resource type="Script" uid="uid://cvtvpcqkh2e0t" path="res://player/player.gd" id="1_rkbax"]
+[ext_resource type="Texture2D" uid="uid://h41gp5cepy0h" path="res://sprites/player/torso_static.png" id="2_2ieo8"]
+[ext_resource type="Texture2D" uid="uid://c77uk0j7aucki" path="res://sprites/player/torso_walk.png" id="3_ebec5"]
+[ext_resource type="Script" uid="uid://cg02bw1u38cvc" path="res://logic_components/health.gd" id="3_g1dw6"]
+[ext_resource type="PackedScene" uid="uid://c837pj1i54256" path="res://logic_components/attack_hitbox.tscn" id="4_boad6"]
+[ext_resource type="Texture2D" uid="uid://cc2sgfo7woq1l" path="res://sprites/player/legs_static.png" id="4_yllr7"]
+[ext_resource type="PackedScene" uid="uid://drdwlop33lqii" path="res://logic_components/damage_hitbox.tscn" id="4_yw30f"]
+[ext_resource type="Texture2D" uid="uid://bayg8tmslctub" path="res://sprites/player/legs_walk_first.png" id="5_ebec5"]
+[ext_resource type="Texture2D" uid="uid://3tb2rs5pf8ye" path="res://sprites/player/legs_walk.png" id="5_kb6p2"]
+[ext_resource type="Texture2D" uid="uid://baxh4hdrfq3py" path="res://sprites/player/lega_walk_last.png" id="7_yllr7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cp3gy"]
+size = Vector2(43, 128)
+
+[sub_resource type="Animation" id="Animation_2ieo8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("flip/attack_hitbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("flip/torso:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("flip/legs:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_wodsf"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("flip/torso:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("flip/legs:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qjkh3"]
+_data = {
+&"RESET": SubResource("Animation_2ieo8"),
+&"walk": SubResource("Animation_wodsf")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dxl4h"]
+size = Vector2(26.249998, 21.454544)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n3v0c"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_yllr7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ebec5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_kb6p2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_yllr7")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cp3gy"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2ieo8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ebec5")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8t03j"]
+
+[node name="player" type="CharacterBody2D" unique_id=1811758079]
+collision_layer = 2
+script = ExtResource("1_rkbax")
+
+[node name="platform_collision" type="CollisionShape2D" parent="." unique_id=26078417]
+position = Vector2(-1.5, 0)
+shape = SubResource("RectangleShape2D_cp3gy")
+
+[node name="Health_Node" type="Node" parent="." unique_id=1795548395]
+script = ExtResource("3_g1dw6")
+metadata/_custom_type_script = "uid://cg02bw1u38cvc"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1991410472]
+libraries/ = SubResource("AnimationLibrary_qjkh3")
+
+[node name="flip" type="Node2D" parent="." unique_id=880301668]
+
+[node name="damage_hitbox" parent="flip" unique_id=1264858738 node_paths=PackedStringArray("health_node") instance=ExtResource("4_yw30f")]
+collision_layer = 2
+collision_mask = 4
+health_node = NodePath("../../Health_Node")
+
+[node name="CollisionShape2D" parent="flip/damage_hitbox" index="0" unique_id=1782259699]
+position = Vector2(-1.7499995, -1.9999957)
+scale = Vector2(1.2, 5.5)
+shape = SubResource("RectangleShape2D_dxl4h")
+
+[node name="legs" type="AnimatedSprite2D" parent="flip" unique_id=930257003]
+position = Vector2(3.5, 0)
+sprite_frames = SubResource("SpriteFrames_n3v0c")
+animation = &"walk"
+
+[node name="torso" type="AnimatedSprite2D" parent="flip" unique_id=1114522672]
+position = Vector2(3.5, 0.8)
+sprite_frames = SubResource("SpriteFrames_cp3gy")
+animation = &"walk"
+
+[node name="attack_hitbox" parent="flip" unique_id=930133808 instance=ExtResource("4_boad6")]
+collision_layer = 2
+collision_mask = 4
+damage = 5.0
+
+[node name="CollisionShape2D" parent="flip/attack_hitbox" index="0" unique_id=1439569439]
+position = Vector2(37, 13.000001)
+scale = Vector2(2, 5)
+shape = SubResource("RectangleShape2D_8t03j")
+disabled = true
+
+[editable path="flip/damage_hitbox"]
+[editable path="flip/attack_hitbox"]

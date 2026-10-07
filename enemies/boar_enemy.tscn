@@ -1,0 +1,207 @@
+[gd_scene format=3 uid="uid://4i16jelg1sco"]
+
+[ext_resource type="Script" uid="uid://dt02btf60cpam" path="res://enemies/boar_enemy.gd" id="1_cdp52"]
+[ext_resource type="Texture2D" uid="uid://dm60mcjfx5vdt" path="res://sprites/enemies/boar/boar_idle.png" id="1_tc36x"]
+[ext_resource type="Script" uid="uid://cg02bw1u38cvc" path="res://logic_components/health.gd" id="2_e3kiy"]
+[ext_resource type="PackedScene" uid="uid://c837pj1i54256" path="res://logic_components/attack_hitbox.tscn" id="3_nv4n0"]
+[ext_resource type="PackedScene" uid="uid://drdwlop33lqii" path="res://logic_components/damage_hitbox.tscn" id="4_cdp52"]
+[ext_resource type="PackedScene" uid="uid://cpobgekxbp5p1" path="res://logic_components/enemy_vision.tscn" id="5_opm6f"]
+[ext_resource type="Texture2D" uid="uid://bvurjubgudqr5" path="res://sprites/enemies/boar/boar_walk.png" id="7_opm6f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4utuw"]
+size = Vector2(78, 126)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ciurg"]
+radius = 22.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_38q4i"]
+radius = 34.0
+height = 118.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_evp1i"]
+radius = 476.93396
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cp3gy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tc36x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_opm6f")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_fpber"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("flip/AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("flip/attack_hitbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_opm6f"]
+resource_name = "attack"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:speed")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 800.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("flip/AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("flip/attack_hitbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_gdfl3"]
+resource_name = "walk"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("flip/AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.033333335, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.033, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 250.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eetej"]
+_data = {
+&"RESET": SubResource("Animation_fpber"),
+&"attack": SubResource("Animation_opm6f"),
+&"walk": SubResource("Animation_gdfl3")
+}
+
+[node name="boar_enemy" type="CharacterBody2D" unique_id=1358105777]
+collision_layer = 4
+script = ExtResource("1_cdp52")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=288909127]
+visible = false
+position = Vector2(-0.9999994, 11.000003)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_4utuw")
+
+[node name="Health_Node" type="Node" parent="." unique_id=1464036673]
+script = ExtResource("2_e3kiy")
+max_hp = 40.0
+metadata/_custom_type_script = "uid://cg02bw1u38cvc"
+
+[node name="flip" type="Node2D" parent="." unique_id=58983369]
+
+[node name="attack_hitbox" parent="flip" unique_id=930133808 instance=ExtResource("3_nv4n0")]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="flip/attack_hitbox" index="0" unique_id=1439569439]
+position = Vector2(39, 9)
+shape = SubResource("CircleShape2D_ciurg")
+disabled = true
+
+[node name="damage_hitbox" parent="flip" unique_id=1264858738 instance=ExtResource("4_cdp52")]
+visible = false
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="flip/damage_hitbox" index="0" unique_id=1782259699]
+position = Vector2(0, 12)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_38q4i")
+
+[node name="enemy_vision" parent="flip" unique_id=1901356570 instance=ExtResource("5_opm6f")]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionPolygon2D" parent="flip/enemy_vision" index="0" unique_id=213152135]
+polygon = PackedVector2Array(46, -3, 46, 25, 213, 89, 250, 44, 249, -25, 218, -70)
+
+[node name="Alert" parent="flip/enemy_vision" index="1" unique_id=483711957]
+shape = SubResource("CircleShape2D_evp1i")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="flip" unique_id=2076436958]
+sprite_frames = SubResource("SpriteFrames_cp3gy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1969618115]
+libraries/ = SubResource("AnimationLibrary_eetej")
+
+[editable path="flip/attack_hitbox"]
+[editable path="flip/damage_hitbox"]
+[editable path="flip/enemy_vision"]

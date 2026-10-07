@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://b66dwj8s0igcd"]
+
+[ext_resource type="Script" uid="uid://xnh8ylt5254" path="res://enemies/test_enemy.gd" id="1_if8y3"]
+[ext_resource type="Texture2D" uid="uid://bq1h4fka82gf3" path="res://sprites/enemies/enemy.png" id="1_lcl3f"]
+[ext_resource type="PackedScene" uid="uid://c837pj1i54256" path="res://logic_components/attack_hitbox.tscn" id="2_8ifd5"]
+[ext_resource type="PackedScene" uid="uid://cpobgekxbp5p1" path="res://logic_components/enemy_vision.tscn" id="2_evp1i"]
+[ext_resource type="PackedScene" uid="uid://drdwlop33lqii" path="res://logic_components/damage_hitbox.tscn" id="3_bkvxi"]
+[ext_resource type="Script" uid="uid://cg02bw1u38cvc" path="res://logic_components/health.gd" id="4_bkvxi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4utuw"]
+radius = 247.12952
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cp3gy"]
+size = Vector2(54, 31.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ifd5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2bghh"]
+
+[node name="test_enemy" type="CharacterBody2D" unique_id=1482315786]
+collision_layer = 4
+script = ExtResource("1_if8y3")
+
+[node name="enemy_vision" parent="." unique_id=1901356570 instance=ExtResource("2_evp1i")]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionPolygon2D" parent="enemy_vision" index="0" unique_id=213152135]
+polygon = PackedVector2Array(102, -50, 138, -34, 150, 9, 137, 39, 14, 15, 14, -9)
+
+[node name="Alert" parent="enemy_vision" index="1" unique_id=483711957]
+shape = SubResource("CircleShape2D_4utuw")
+
+[node name="Enemy" type="Sprite2D" parent="." unique_id=957280135]
+position = Vector2(5, 3)
+texture = ExtResource("1_lcl3f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1670161138]
+position = Vector2(0, 3.75)
+shape = SubResource("RectangleShape2D_cp3gy")
+
+[node name="attack_hitbox" parent="." unique_id=930133808 instance=ExtResource("2_8ifd5")]
+visible = false
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="attack_hitbox" index="0" unique_id=1439569439]
+position = Vector2(0, 3)
+scale = Vector2(2.4, 1.4)
+shape = SubResource("RectangleShape2D_8ifd5")
+
+[node name="damage_hitbox" parent="." unique_id=1264858738 node_paths=PackedStringArray("health_node") instance=ExtResource("3_bkvxi")]
+visible = false
+collision_layer = 4
+collision_mask = 2
+health_node = NodePath("../Health_Node")
+
+[node name="CollisionShape2D" parent="damage_hitbox" index="0" unique_id=1782259699]
+position = Vector2(0, 4)
+scale = Vector2(2.4, 1.5)
+shape = SubResource("RectangleShape2D_2bghh")
+
+[node name="Health_Node" type="Node" parent="." unique_id=348134290]
+script = ExtResource("4_bkvxi")
+max_hp = 20.0
+metadata/_custom_type_script = "uid://cg02bw1u38cvc"
+
+[editable path="enemy_vision"]
+[editable path="attack_hitbox"]
+[editable path="damage_hitbox"]

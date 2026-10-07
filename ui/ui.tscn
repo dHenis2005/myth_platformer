@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://0ixaf35mb8vx"]
+
+[ext_resource type="Texture2D" uid="uid://lrab33a4s7nk" path="res://sprites/ui/bg.png" id="1_wl5ax"]
+[ext_resource type="Texture2D" uid="uid://0cr0vddej050" path="res://sprites/ui/over.png" id="2_vkava"]
+[ext_resource type="Texture2D" uid="uid://4n2g0lsic5x3" path="res://sprites/ui/progress.png" id="3_tf0e0"]
+[ext_resource type="Script" uid="uid://celjjsvnsnwy4" path="res://ui/hp_bar.gd" id="4_vkava"]
+[ext_resource type="PackedScene" uid="uid://c8bvokxv68a50" path="res://ui/inventory.tscn" id="5_tf0e0"]
+
+[node name="UI" type="CanvasLayer" unique_id=174834967]
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=690461151]
+offset_right = 300.0
+offset_bottom = 30.0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer" unique_id=804620979]
+layout_mode = 2
+value = 50.0
+texture_under = ExtResource("1_wl5ax")
+texture_over = ExtResource("2_vkava")
+texture_progress = ExtResource("3_tf0e0")
+tint_under = Color(1, 1, 1, 0.62352943)
+tint_progress = Color(0, 0.6774449, 0.7992183, 1)
+script = ExtResource("4_vkava")
+
+[node name="inventory" parent="." unique_id=1659351238 instance=ExtResource("5_tf0e0")]

@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://c8bvokxv68a50"]
+
+[ext_resource type="Script" uid="uid://b3ay68qhpf10e" path="res://ui/inventory.gd" id="1_kosh3"]
+
+[node name="inventory" type="MarginContainer" unique_id=385774160]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+script = ExtResource("1_kosh3")
+
+[node name="FoldableContainer" type="FoldableContainer" parent="." unique_id=1650129268]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="FoldableContainer" unique_id=808120383]
+layout_mode = 2

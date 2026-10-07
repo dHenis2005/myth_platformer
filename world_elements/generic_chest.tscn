@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://catv1rjjf6x0p"]
+
+[ext_resource type="Script" uid="uid://tcoc8ea2132b" path="res://world_elements/generic_chest.gd" id="1_lkb4i"]
+[ext_resource type="Texture2D" uid="uid://dd6wy2inosqep" path="res://sprites/container/chest_closed.png" id="2_aoauk"]
+[ext_resource type="Texture2D" uid="uid://dft6pqfw882g7" path="res://sprites/container/chest_opening.png" id="3_v7vnu"]
+[ext_resource type="Texture2D" uid="uid://o75hk518ncuk" path="res://sprites/container/chest_open.png" id="4_o4h04"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4utuw"]
+size = Vector2(131.5, 89.75)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cp3gy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_aoauk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_v7vnu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_o4h04")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="generic_chest" type="Area2D" unique_id=253820999]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_lkb4i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=681578691]
+shape = SubResource("RectangleShape2D_4utuw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1000105815]
+sprite_frames = SubResource("SpriteFrames_cp3gy")

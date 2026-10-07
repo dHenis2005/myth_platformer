@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://drdwlop33lqii"]
+
+[ext_resource type="Script" uid="uid://bwgnedje5xg3t" path="res://logic_components/damage_hitbox.gd" id="1_dxl4h"]
+
+[sub_resource type="GDScript" id="GDScript_7cxth"]
+script/source = "extends CollisionShape2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[node name="damage_hitbox" type="Area2D" unique_id=1264858738]
+script = ExtResource("1_dxl4h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1782259699]
+debug_color = Color(0.9874789, 0, 0.3175734, 0.41960785)
+script = SubResource("GDScript_7cxth")

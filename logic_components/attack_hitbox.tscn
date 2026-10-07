@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c837pj1i54256"]
+
+[ext_resource type="Script" uid="uid://dnpf2b1qdqls6" path="res://logic_components/attack_hitbox.gd" id="1_otdgp"]
+
+[node name="attack_hitbox" type="Area2D" unique_id=930133808]
+script = ExtResource("1_otdgp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1439569439]
+debug_color = Color(0.65457684, 0.5179122, 0, 0.41960785)

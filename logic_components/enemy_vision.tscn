@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cpobgekxbp5p1"]
+
+[ext_resource type="Script" uid="uid://cqfi5fowru3t" path="res://logic_components/enemy_vision.gd" id="1_jtfx0"]
+
+[node name="enemy_vision" type="Area2D" unique_id=1901356570]
+script = ExtResource("1_jtfx0")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=213152135]
+
+[node name="Alert" type="CollisionShape2D" parent="." unique_id=483711957]
+disabled = true

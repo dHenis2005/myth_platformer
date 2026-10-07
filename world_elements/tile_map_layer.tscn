@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://d0rwakjlqpmvs"]
+
+[ext_resource type="Texture2D" uid="uid://dtfbwwjbxv5e5" path="res://ground.png" id="1_2wfbj"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_w0p88"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2wfbj"]
+texture = ExtResource("1_2wfbj")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -6, 64, -6, 64, -2, -64, -2)
+0:0/0/physics_layer_0/polygon_0/one_way = true
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -2, 64, -2, 64, 64, -64, 64)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -6, 64, -6, 64, -2, -64, -2)
+1:0/0/physics_layer_0/polygon_0/one_way = true
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -2, 64, -2, 64, 64, -64, 64)
+
+[sub_resource type="TileSet" id="TileSet_cp3gy"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetScenesCollectionSource_w0p88")
+sources/8 = SubResource("TileSetAtlasSource_2wfbj")
+tile_proxies/coords_level = [[1, Vector2i(0, 0)], [3, Vector2i(0, 0)], [2, Vector2i(0, 0)], [3, Vector2i(1, 0)], [3, Vector2i(0, 0)], [5, Vector2i(0, 0)], [4, Vector2i(0, 0)], [8, Vector2i(0, 0)], [5, Vector2i(0, 0)], [8, Vector2i(1, 0)], [6, Vector2i(0, 0)], [8, Vector2i(2, 0)], [7, Vector2i(0, 0)], [8, Vector2i(3, 0)], [8, Vector2i(0, 0)], [9, Vector2i(1, 0)], [10, Vector2i(0, 0)], [12, Vector2i(0, 0)], [11, Vector2i(0, 0)], [12, Vector2i(1, 0)], [12, Vector2i(0, 0)], [3, Vector2i(2, 0)], [12, Vector2i(1, 0)], [3, Vector2i(3, 0)]]
+
+[node name="TileMapLayer" type="TileMapLayer" unique_id=2049478595]
+tile_set = SubResource("TileSet_cp3gy")

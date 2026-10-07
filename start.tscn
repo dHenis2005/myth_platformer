@@ -1,0 +1,50 @@
+[gd_scene format=4 uid="uid://ca52r2ngmxhvk"]
+
+[ext_resource type="PackedScene" uid="uid://bsqfy1jpl5p63" path="res://player/player.tscn" id="1_ots34"]
+[ext_resource type="PackedScene" uid="uid://d0rwakjlqpmvs" path="res://world_elements/tile_map_layer.tscn" id="2_qn1rc"]
+[ext_resource type="PackedScene" uid="uid://0ixaf35mb8vx" path="res://ui/ui.tscn" id="3_1n0d2"]
+[ext_resource type="PackedScene" uid="uid://b66dwj8s0igcd" path="res://enemies/test_enemy.tscn" id="4_y5hus"]
+[ext_resource type="PackedScene" uid="uid://catv1rjjf6x0p" path="res://world_elements/generic_chest.tscn" id="5_oiuna"]
+[ext_resource type="PackedScene" uid="uid://dq18ujdqswjd4" path="res://logic_components/item.tscn" id="6_4a3qj"]
+[ext_resource type="Texture2D" uid="uid://b66ona0xlnjyh" path="res://sprites/items/sword.png" id="7_g38d0"]
+[ext_resource type="PackedScene" uid="uid://4i16jelg1sco" path="res://enemies/boar_enemy.tscn" id="8_pob1m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70ao8"]
+atlas = ExtResource("7_g38d0")
+region = Rect2(46.665985, 14.333649, 40, 85.33334)
+
+[node name="start" type="Node2D" unique_id=1685997929]
+
+[node name="player" parent="." unique_id=1811758079 instance=ExtResource("1_ots34")]
+position = Vector2(413, 528)
+
+[node name="Camera2D" type="Camera2D" parent="player" unique_id=1157522741]
+zoom = Vector2(1.5, 1.5)
+
+[node name="TileMapLayer" parent="." unique_id=2049478595 instance=ExtResource("2_qn1rc")]
+position = Vector2(242, 672)
+tile_map_data = PackedByteArray("AAAFAP7/CAABAAAAAAADAP3/CAAAAAAAAAACAP3/CAAAAAAAAAAEAP7/CAABAAAAAAD+////CAACAAAAAAD/////CAACAAAAAAAAAP//CAADAAAAAAABAP//CAADAAAAAAACAP//CAACAAAAAAADAP//CAADAAAAAAAEAP//CAACAAAAAAAFAP//CAACAAAAAAAGAP//CAADAAAAAAAHAP//CAACAAAAAAD+//7/CAACAAAAAAD+//3/CAACAAAAAAAIAP//CAACAAAAAAAJAP//CAACAAAAAAAKAP//CAACAAAAAAALAP//CAACAAAAAAAMAP//CAACAAAAAAANAP//CAACAAAAAAAOAP//CAACAAAAAAAPAP//CAADAAAAAAAQAP//CAADAAAAAAARAP//CAADAAAAAAAVAP//CAADAAAAAAAUAP//CAADAAAAAAATAP//CAADAAAAAAASAP//CAADAAAAAAA=")
+
+[node name="UI" parent="." unique_id=174834967 instance=ExtResource("3_1n0d2")]
+
+[node name="TextureProgressBar" parent="UI/MarginContainer" parent_id_path=PackedInt32Array(174834967, 690461151) index="0" unique_id=804620979 node_paths=PackedStringArray("player_hp")]
+player_hp = NodePath("../../../player/Health_Node")
+
+[node name="inventory" parent="UI" index="1" unique_id=1659351238 node_paths=PackedStringArray("player")]
+player = NodePath("../../player")
+
+[node name="test_enemy" parent="." unique_id=1482315786 instance=ExtResource("4_y5hus")]
+position = Vector2(650, 577)
+
+[node name="generic_chest" parent="." unique_id=253820999 instance=ExtResource("5_oiuna")]
+position = Vector2(179, 590)
+item = ExtResource("6_4a3qj")
+icon = SubResource("AtlasTexture_70ao8")
+
+[node name="boar_enemy" parent="." unique_id=1358105777 instance=ExtResource("8_pob1m")]
+position = Vector2(1100, 547)
+
+[editable path="player"]
+[editable path="player/flip/damage_hitbox"]
+[editable path="player/flip/attack_hitbox"]
+[editable path="UI"]
